@@ -14,14 +14,17 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/sign_in")
-    public String signIn(){
-        return "hello";
+    @PostMapping("/sign_in")
+    public String signIn(@RequestBody User user){
+        return userService.loginUser(user);
     }
+
+
     @PostMapping("/sign_up")
     public ResponseEntity<String> signUp(@RequestBody User user){
         return userService.addUser(user);
     }
+
 
     @GetMapping("/logout")
     public void logout(){

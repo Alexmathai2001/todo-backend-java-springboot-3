@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserDao extends JpaRepository<User,Integer> {
-    @Query(value = "Select * from users where user_id=:userid",nativeQuery = true)
-    Optional<User> findUserById(String userid);
+    @Query(value = "Select * from users where email=:emailId",nativeQuery = true)
+    Optional<User> findUserByEmail(String emailId);
 }
