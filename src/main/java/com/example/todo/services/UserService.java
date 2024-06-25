@@ -2,6 +2,7 @@ package com.example.todo.services;
 
 import com.example.todo.dao.UserDao;
 import com.example.todo.repo.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,19 +73,44 @@ public class UserService {
         return hashedInput.equals(storedHash);
     }
 
-    public String loginUser(User user) {
+
+    public String getUserInfo(HttpSession session) {
+        String loggedInUser = (String) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            return "Logged in as: " + loggedInUser;
+        } else {
+            return "Not logged in";
+        }
+    }
+
+    public String loginUser(User user, HttpSession session) {
         String email = user.getEmail();
+        System.out.println(email);
         Optional<User> optionalUser = userDao.findUserByEmail(email);
         if(optionalUser.isPresent()){
             String userTypedPassword = user.getPassword();
             String dbPassword = optionalUser.get().getPassword();
             if(verifyPassword(userTypedPassword, dbPassword)){
+                String useridFromDb = optionalUser.get().getUser_id();
+                session.setAttribute("loggedInUser",useridFromDb );
                 return "user found and password is matched";
+
             }else{
                 return "user found but password is not correct";
             }
         }else {
             return "user not found";
+        }
+    }
+
+    public String logout(HttpSession session) {
+        //checking if a session is present or not
+        if(session.getAttribute("loggedInUser") != null){
+            //destroying session
+            session.invalidate();
+            return "Logout made successfull";
+        }else {
+            return "No one is logged in";
         }
     }
 }
