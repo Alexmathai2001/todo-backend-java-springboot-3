@@ -15,14 +15,17 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    HttpSession httpSession;
+
     @PostMapping("/sign_in")
     public String signIn(@RequestBody User user, HttpSession session){
         return userService.loginUser(user,session);
     }
 
     @GetMapping("/user_info")
-    public String userInfo(HttpSession session) {
-        return userService.getUserInfo(session);
+    public String userInfo() {
+        return userService.getUserInfo(httpSession);
     }
 
     @GetMapping("/logout")
