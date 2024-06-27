@@ -17,6 +17,12 @@ public class ProjectService {
     public ResponseEntity<List<Project>> getProjects(HttpSession session) {
         String loggedInUser = (String) session.getAttribute("loggedInUser");
 
-        return new ResponseEntity<>(projectDao.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(projectDao.findByUserid(loggedInUser), HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> postProject(HttpSession session,Project project) {
+        project.setUser_id((String) session.getAttribute("loggedInUser"));
+        projectDao.save(project);
+        return new ResponseEntity<>("successfull posted",HttpStatus.CREATED);
     }
 }
