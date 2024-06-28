@@ -26,12 +26,21 @@ public class ProjectController {
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
         }
     }
-@PostMapping("/addproject")
+    @PostMapping("/addproject")
     public ResponseEntity<String> postProjects(@RequestBody Project project){
         if(session.getAttribute("loggedInUser") != null){
             return projectService.postProject(session,project);
         }else{
             return new ResponseEntity<>("Not logged in", HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/getproject/{projectid}")
+    public ResponseEntity<List<Project>> getProjectDetails(@PathVariable int projectid){
+
+        if(session.getAttribute("loggedInUser") != null){
+            return projectService.getProjectDetails(session,projectid);
+        }else{
+            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
         }
     }
 }

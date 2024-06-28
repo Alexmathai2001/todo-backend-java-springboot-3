@@ -13,8 +13,8 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    private String user_id;
-    private String user_name;
+    private String userid;
+    private String username;
     private String email;
     private String password;
 

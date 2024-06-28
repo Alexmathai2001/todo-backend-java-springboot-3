@@ -13,9 +13,12 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int projectid;
-    private String userid;
+   // private String userid;
     private String projectname;
     private String projectdesc;
     private Date creationdate;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

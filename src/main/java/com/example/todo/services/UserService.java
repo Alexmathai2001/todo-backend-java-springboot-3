@@ -30,7 +30,10 @@ public class UserService {
             String userID = generateUserID();
             String password = user.getPassword();
             user.setPassword(hashString(password));
-            user.setUser_id(userID);
+//            User user=new User();
+//            user.setUserid((String) session.getAttribute("loggedInUser"));
+//            project.setUser(user);
+            user.setUserid(userID);
             userDao.save(user);
             return new ResponseEntity<>("user created"+userID, HttpStatus.OK);
         }
@@ -91,7 +94,7 @@ public class UserService {
             String userTypedPassword = user.getPassword();
             String dbPassword = optionalUser.get().getPassword();
             if(verifyPassword(userTypedPassword, dbPassword)){
-                String useridFromDb = optionalUser.get().getUser_id();
+                String useridFromDb = optionalUser.get().getUserid();
                 session.setAttribute("loggedInUser",useridFromDb );
                 return "user found and password is matched";
 
