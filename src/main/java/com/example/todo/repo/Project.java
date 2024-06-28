@@ -7,15 +7,15 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "projects")
+@Table(name = "projectdata")
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String project_id;
-    private String user_id;
-    private String project_name;
-    private String project_desc;
-    private Date creation_date;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int projectid;
+    private String userid;
+    private String projectname;
+    private String projectdesc;
+    private Date creationdate;
 
 }

@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProjectDao extends JpaRepository<Project,Integer> {
-    @Query(value = "SELECT * FROM projects q WHERE q.user_id=:loggedInUser",nativeQuery = true)
+    @Query(value = "SELECT * FROM projectdata q WHERE q.userid=:loggedInUser",nativeQuery = true)
     List<Project> findByUserid(String loggedInUser);
 }
