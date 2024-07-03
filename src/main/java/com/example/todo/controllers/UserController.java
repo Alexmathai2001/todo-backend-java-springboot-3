@@ -1,6 +1,6 @@
 package com.example.todo.controllers;
 
-import com.example.todo.repo.User;
+import com.example.todo.entity.User;
 import com.example.todo.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

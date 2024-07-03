@@ -1,6 +1,6 @@
 package com.example.todo.controllers;
 
-import com.example.todo.repo.Project;
+import com.example.todo.entity.Project;
 import com.example.todo.services.ProjectService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +35,27 @@ public class ProjectController {
         }
     }
     @GetMapping("/getproject/{projectid}")
-    public ResponseEntity<List<Project>> getProjectDetails(@PathVariable int projectid){
+    public ResponseEntity<Project> getProjectDetails(@PathVariable int projectid){
 
         if(session.getAttribute("loggedInUser") != null){
             return projectService.getProjectDetails(session,projectid);
         }else{
-            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Project(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/update_project")
+    public ResponseEntity<?> updateproject(@RequestBody Project project){
+        try {
+            if(session.getAttribute("loggedInUser") != null){
+                Project projectRes = projectService.updateProject(project,session);
+                return ResponseEntity.status(200).body(projectRes);
+            }else{
+                return ResponseEntity.status(201).body("user not logged in. Please try again after logging in!");
+            }
+
+        }catch (RuntimeException e ){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

@@ -1,5 +1,6 @@
-package com.example.todo.repo;
+package com.example.todo.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class Task {
     private boolean status;
     @ManyToOne
     @JoinColumn(name="projectid")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Project project;
 
     @Override

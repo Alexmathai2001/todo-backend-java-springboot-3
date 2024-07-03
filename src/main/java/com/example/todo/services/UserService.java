@@ -1,7 +1,7 @@
 package com.example.todo.services;
 
 import com.example.todo.dao.UserDao;
-import com.example.todo.repo.User;
+import com.example.todo.entity.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
