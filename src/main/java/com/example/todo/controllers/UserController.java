@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/user_info")
-    public String userInfo() {
+    public ResponseEntity<String> userInfo() {
         return userService.getUserInfo(httpSession);
     }
 

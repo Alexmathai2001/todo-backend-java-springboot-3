@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,7 +15,6 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int projectid;
-   // private String userid;
     private String projectname;
     private String projectdesc;
     private Date creationdate;
@@ -22,5 +22,7 @@ public class Project {
     @JoinColumn(name = "user_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Task> task;
 
 }

@@ -1,6 +1,7 @@
 package com.example.todo.services;
 
 import com.example.todo.dao.ProjectDao;
+import com.example.todo.dao.TaskDao;
 import com.example.todo.entity.Project;
 import com.example.todo.entity.User;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class ProjectService {
     @Autowired
     ProjectDao projectDao;
+    @Autowired
+    TaskDao taskdao;
     public ResponseEntity<List<Project>> getProjects(HttpSession session) {
 
         String loggedInUser = (String) session.getAttribute("loggedInUser");
@@ -52,5 +55,23 @@ public class ProjectService {
             }else {
                 throw  new RuntimeException(project.getProjectname()+" project doesnot exist!");
             }
+    }
+
+    public ResponseEntity<?> deleteProject(int projectid, HttpSession session) {
+        String loggedInUser = (String) session.getAttribute("loggedInUser");
+        Optional<Project> dbproject = projectDao.findById(projectid);
+        if(dbproject.isPresent()){
+            Project existingProject = dbproject.get();
+            if(!existingProject.getUser().getUserid().equals(loggedInUser)){
+                System.out.println("unautorized");
+                return ResponseEntity.status(401).body("unautorized request");
+            }
+            projectDao.delete(existingProject);
+            System.out.println("deleted");
+            return ResponseEntity.status(200).body("The project was deleted successfully");
+        }else {
+            return ResponseEntity.status(404).body("project not found");
+        }
+
     }
 }

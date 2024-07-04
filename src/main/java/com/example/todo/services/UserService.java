@@ -77,12 +77,12 @@ public class UserService {
     }
 
 
-    public String getUserInfo(HttpSession session) {
+    public ResponseEntity<String> getUserInfo(HttpSession session) {
         String loggedInUser = (String) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
-            return "Logged in as: " + loggedInUser;
+            return new ResponseEntity<>("session data : "+loggedInUser,HttpStatus.ACCEPTED);
         } else {
-            return "Not logged in";
+            return new ResponseEntity<>("Login required",HttpStatus.UNAUTHORIZED);
         }
     }
 

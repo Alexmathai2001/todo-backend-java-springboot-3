@@ -58,4 +58,19 @@ public class ProjectController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/delete_project/{projectid}")
+    public ResponseEntity<?> updateproject(@PathVariable int projectid){
+        try {
+            if(session.getAttribute("loggedInUser") != null){
+
+                return ResponseEntity.status(200).body(projectService.deleteProject(projectid,session));
+            }else{
+                return ResponseEntity.status(201).body("user not logged in. Please try again after logging in!");
+            }
+
+        }catch (RuntimeException e ){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

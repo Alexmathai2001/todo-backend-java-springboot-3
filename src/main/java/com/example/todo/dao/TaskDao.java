@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TaskDao extends JpaRepository<Task,Integer> {
     List<Task> findByProjectProjectid(int projectid);
+
+
 }
