@@ -17,6 +17,7 @@ public class Task {
     private String taskname;
     private LocalDate creationdate;
     private boolean status;
+
     @ManyToOne
     @JoinColumn(name="projectid")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

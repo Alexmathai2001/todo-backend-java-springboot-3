@@ -29,4 +29,15 @@ public class TaskController {
 
         return taskservice.getTask(projectid);
     }
+
+
+    @PutMapping("/update_todo")
+    public ResponseEntity<?> updateTodo(@RequestBody Task task){
+        try {
+            return taskservice.updateTodo(task,session);
+
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

@@ -20,7 +20,7 @@ public class Project {
     private Date creationdate;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private User user;
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> task;

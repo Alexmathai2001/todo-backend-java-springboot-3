@@ -50,7 +50,6 @@ public class ProjectService {
                 newProject.setProjectdesc(project.getProjectdesc());
                 newProject.setCreationdate(project.getCreationdate());
                 System.out.println("in");
-                System.out.println(newProject);
                 return projectDao.save(newProject);
             }else {
                 throw  new RuntimeException(project.getProjectname()+" project doesnot exist!");
