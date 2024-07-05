@@ -1,8 +1,14 @@
-###Tasks completed
--initializing project
--connecting to postgres
--creating post method for signup
--adding data to db
--hashing password
--created post method for signin
--if user is found the password is verified from db
+# Todo spring app
+
+Todo application done with java - springboot for backend.
+
+## Apis exposed-
+
+* Signup
+* Signin
+* Login-check (using session)
+* Get user specific projects
+* Get single project based on ID
+* Update project
+* Delete project
+* CRUD todos
