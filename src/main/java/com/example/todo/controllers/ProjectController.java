@@ -20,11 +20,12 @@ public class ProjectController {
     HttpSession session;
     @GetMapping("/getprojects")
     public ResponseEntity<List<Project>> getProjects(){
-        if(session.getAttribute("loggedInUser") != null){
-            return projectService.getProjects(session);
-        }else{
-            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
-        }
+            if (session.getAttribute("loggedInUser") != null) {
+                return projectService.getProjects(session);
+            } else {
+                return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
+            }
+
     }
     @PostMapping("/addproject")
     public ResponseEntity<String> postProjects(@RequestBody Project project){
